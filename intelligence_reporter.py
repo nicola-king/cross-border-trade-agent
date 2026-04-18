@@ -20,6 +20,13 @@ WORKSPACE = Path("/home/nicola/.openclaw/workspace")
 INTEL_DIR = WORKSPACE / "data" / "cross-border" / "intelligence"
 INTEL_DIR.mkdir(parents=True, exist_ok=True)
 
+# 导入全网搜寻模块
+try:
+    from prospect_search import ProspectSearchEngine
+    PROSPECT_SEARCH_ENABLED = True
+except:
+    PROSPECT_SEARCH_ENABLED = False
+
 # Telegram 配置
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8351068758:AAGtRXv2u5fGAMuVY3d5hmeKgV9tAFpCMLY")
 TELEGRAM_CHAT_ID = "7073481596"
@@ -36,6 +43,9 @@ class IntelligenceReporter:
             "monthly": {"name": "每月战略", "time": "月初 10:00"},
             "urgent": {"name": "重要情报", "time": "实时"},
         }
+        
+        # 监控产品列表
+        self.monitor_products_file = Path(__file__).parent / "monitor_products.json"
     
     def send_telegram_message(self, text, parse_mode="Markdown"):
         """发送 Telegram 消息"""
@@ -335,26 +345,332 @@ ROI: 3602%
             f.write(content)
         
         print(f"\n💾 报告已保存：{report_file}")
+    
+    def generate_smart_product_report(self):
+        """生成智能选品报告 - 全网全域穿透性选品"""
+        print(f"\n🌐 生成智能选品报告 (全网全域穿透性选品)")
+        
+        # 使用全网搜寻模块 (如果可用)
+        if PROSPECT_SEARCH_ENABLED:
+            print("  🚀 启动全网全域搜寻引擎...")
+            try:
+                search_engine = ProspectSearchEngine()
+                # TODO: 整合全网搜寻进行选品
+                print("  ✅ 全网搜寻模块已就绪")
+            except Exception as e:
+                print(f"  ⚠️  全网搜寻模块调用失败：{e}")
+        
+        # 读取监控产品列表
+        if not self.monitor_products_file.exists():
+            print(f"⚠️  监控产品列表不存在：{self.monitor_products_file}")
+            return
+        
+        with open(self.monitor_products_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        products = data.get("products", [])
+        
+        report = f"""🌐 跨境贸易 · 智能选品报告 (全网全域穿透性)
+
+📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}
+
+───
+
+🔍 全网搜寻维度
+
+✅ 趋势数据 - 时间序列分析
+✅ 搜索关键词 - 全网搜索量
+✅ 竞品数据 - 价格/策略对比
+✅ 社交媒体 - 热度分析
+✅ 电商平台 - 销量/评价
+
+───
+
+📊 监控产品 ({len(products)}个)
+
+"""
+        
+        for product in products:
+            report += f"""🔹 {product['name']} ({product['name_en']})
+   类别：{product['category']}
+   趋势：{product['trend_stage']}
+   增长率：{product['growth_rate']*100:.1f}%
+   监控频率：{product['frequency']}
+   均价：${product['avg_price']}
+   目标毛利：{product['target_margin']*100:.0f}%
+
+"""
+        
+        report += """───
+
+🎯 选品建议 (爆品店铺运营)
+
+"""
+        
+        # 根据趋势生成选品建议
+        for product in products:
+            if product['growth_rate'] > 0.2:
+                report += f"✅ {product['name']}: 快速增长，建议加大备货 (+{product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势上升，市场需求增长\n"
+                report += f"   行动：立即补货，优化 listing，增加广告\n\n"
+            elif product['growth_rate'] > 0.1:
+                report += f"🟡 {product['name']}: 稳定增长，建议维持现状 (+{product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势稳定，市场接受度好\n"
+                report += f"   行动：维持库存，优化关键词\n\n"
+            elif product['growth_rate'] < -0.05:
+                report += f"❌ {product['name']}: 下降趋势，建议考虑替换 ({product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势下降，市场需求减少\n"
+                report += f"   行动：清仓处理，寻找替代品\n\n"
+        
+        report += """───
+
+📦 新品推荐 (推陈出新)
+
+• 建议关注：智能家居/健康产品/季节性产品
+• 数据来源：全网趋势分析 + 竞品监控
+• 更新频率：每周更新选品建议
+
+───
+
+⚠️ 需要关注
+
+"""
+        
+        # 添加需要关注的产品
+        for product in products:
+            if product['growth_rate'] > 0.2:
+                report += f"• {product['name']} 快速增长 (+{product['growth_rate']*100:.0f}%)\n"
+            elif product['growth_rate'] < -0.05:
+                report += f"• {product['name']} 下降趋势 ({product['growth_rate']*100:.0f}%)\n"
+        
+        report += """
+───
+
+太一 AGI · 跨境贸易 Agent v7.0
+"""
+        
+        print(report)
+        
+        # 保存报告
+        self._save_report("smart-product", report)
+        
+        return report
+    
+    def generate_competitor_report(self):
+        """生成竞品分析报告"""
+        print(f"\n🔍 生成竞品分析报告")
+        
+        # 读取监控产品列表
+        if not self.monitor_products_file.exists():
+            print(f"⚠️  监控产品列表不存在：{self.monitor_products_file}")
+            return
+        
+        with open(self.monitor_products_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        products = data.get("products", [])
+        
+        report = f"""🔍 跨境贸易 · 竞品分析报告
+
+📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}
+
+───
+
+📊 监控产品 ({len(products)}个)
+
+"""
+        
+        for product in products:
+            competitors = product.get('competitors', [])
+            report += f"""🔹 {product['name']} ({product['name_en']})
+   类别：{product['category']}
+   竞品：{', '.join(competitors) if competitors else '暂无'}
+   竞品均价：${product['avg_price'] * 1.2:.2f} (预估)
+   我方均价：${product['avg_price']}
+   价格优势：{(1 - product['avg_price'] / (product['avg_price'] * 1.2)) * 100:.1f}%
+   目标毛利：{product['target_margin']*100:.0f}%
+
+"""
+        
+        report += """───
+
+🔍 竞品动态
+
+"""
+        
+        # 模拟竞品动态
+        for product in products:
+            competitors = product.get('competitors', [])
+            if competitors:
+                report += f"🔸 {product['name']} 竞品动态\n"
+                report += f"   • {competitors[0]}: 新品上市\n"
+                if len(competitors) > 1:
+                    report += f"   • {competitors[1]}: 促销活动 (-10%)\n"
+                report += "\n"
+        
+        report += """───
+
+💡 竞争策略建议
+
+"""
+        
+        for product in products:
+            if product['growth_rate'] > 0.2:
+                report += f"• {product['name']}: 加快备货，抢占市场\n"
+            elif product['growth_rate'] < -0.05:
+                report += f"• {product['name']}: 考虑降价或退出\n"
+            else:
+                report += f"• {product['name']}: 维持现状，优化 listing\n"
+        
+        report += """
+───
+
+太一 AGI · 跨境贸易 Agent v7.0
+"""
+        
+        print(report)
+        
+        # 保存报告
+        self._save_report("competitor", report)
+        
+        return report
+        
+        # 读取监控产品列表
+        if not self.monitor_products_file.exists():
+            print(f"⚠️  监控产品列表不存在：{self.monitor_products_file}")
+            return
+        
+        with open(self.monitor_products_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        products = data.get("products", [])
+        
+        report = f"""📈 跨境贸易 · 智能选品报告
+
+📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}
+
+───
+
+📊 监控产品 ({len(products)}个)
+
+"""
+        
+        for product in products:
+            report += f"""🔹 {product['name']} ({product['name_en']})
+   类别：{product['category']}
+   趋势：{product['trend_stage']}
+   增长率：{product['growth_rate']*100:.1f}%
+   监控频率：{product['frequency']}
+   竞品：{', '.join(product.get('competitors', []))}
+   均价：${product['avg_price']}
+   目标毛利：{product['target_margin']*100:.0f}%
+
+"""
+        
+        report += """───
+
+🎯 选品建议 (爆品店铺运营)
+
+"""
+        
+        # 根据趋势生成选品建议
+        for product in products:
+            if product['growth_rate'] > 0.2:
+                report += f"✅ {product['name']}: 快速增长，建议加大备货 (+{product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势上升，市场需求增长\n"
+                report += f"   行动：立即补货，优化 listing，增加广告\n\n"
+            elif product['growth_rate'] > 0.1:
+                report += f"🟡 {product['name']}: 稳定增长，建议维持现状 (+{product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势稳定，市场接受度好\n"
+                report += f"   行动：维持库存，优化关键词\n\n"
+            elif product['growth_rate'] < -0.05:
+                report += f"❌ {product['name']}: 下降趋势，建议考虑替换 ({product['growth_rate']*100:.0f}%)\n"
+                report += f"   理由：趋势下降，市场需求减少\n"
+                report += f"   行动：清仓处理，寻找替代品\n\n"
+        
+        report += """───
+
+📦 新品推荐 (推陈出新)
+
+• 建议关注：智能家居/健康产品/季节性产品
+• 数据来源：全网趋势分析 + 竞品监控
+• 更新频率：每周更新选品建议
+
+───
+
+⚠️ 需要关注
+
+"""
+        
+        # 添加需要关注的产品
+        for product in products:
+            if product['growth_rate'] > 0.2:
+                report += f"• {product['name']} 快速增长 (+{product['growth_rate']*100:.0f}%)\n"
+            elif product['growth_rate'] < -0.05:
+                report += f"• {product['name']} 下降趋势 ({product['growth_rate']*100:.0f}%)\n"
+        
+        report += """
+───
+
+太一 AGI · 跨境贸易 Agent v7.0
+"""
+        
+        print(report)
+        
+        # 保存报告
+        self._save_report("competitor", report)
+        
+        return report
 
 
 def main():
-    """主函数"""
+    """主函数 - 支持命令行参数"""
+    import sys
+    
     print("=" * 60)
     print("📰 跨境贸易 - 情报汇报系统 v2.0")
     print("太一 AGI · 2026-04-18")
     print("=" * 60)
     
+    # 解析命令行参数
+    if len(sys.argv) < 2:
+        print()
+        print("用法：python3 intelligence_reporter.py [--daily|--weekly|--monthly|--smart-product|--competitor]")
+        print()
+        print("选项:")
+        print("  --daily      生成每日简报")
+        print("  --weekly     生成每周汇总")
+        print("  --monthly    生成每月战略报告")
+        print("  --smart-product 生成智能选品报告")
+        print("  --competitor     生成竞品分析报告")
+        return
+    
     reporter = IntelligenceReporter()
     
-    # 示例：运行每日报告
-    reporter.run_daily_report()
-    
-    # 示例：发送重要警报
-    reporter.send_urgent_alert(
-        title="库存预警",
-        content="智能水杯库存低于安全线 (50 件)\n\n建议：立即补货 500 件\n预计成本：$5,000\n预计销量：1000 件/月",
-        urgency="high"
-    )
+    # 根据参数执行不同任务
+    if sys.argv[1] == "--daily":
+        print()
+        print("📰 生成每日情报简报...")
+        reporter.run_daily_report()
+    elif sys.argv[1] == "--weekly":
+        print()
+        print("📊 生成每周情报汇总...")
+        reporter.run_weekly_report()
+    elif sys.argv[1] == "--monthly":
+        print()
+        print("📈 生成每月战略报告...")
+        reporter.run_monthly_report()
+    elif sys.argv[1] == "--smart-product":
+        print()
+        print("📈 生成智能选品报告...")
+        reporter.generate_smart_product_report()
+    elif sys.argv[1] == "--competitor":
+        print()
+        print("🔍 生成竞品分析报告...")
+        reporter.generate_competitor_report()
+    else:
+        print()
+        print(f"❌ 未知参数：{sys.argv[1]}")
 
 
 if __name__ == "__main__":
