@@ -12,6 +12,7 @@
 """
 
 import json
+import math
 import random
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -53,7 +54,7 @@ class ProductTrendForecaster:
             
             # 添加趋势、季节性、随机波动
             trend = 1.0 + (i * 0.02)  # 每月增长 2%
-            seasonal = 1.0 + 0.2 * random.sin(i * 0.5)  # 季节性波动
+            seasonal = 1.0 + 0.2 * math.sin(i * 0.5)  # 季节性波动
             noise = 0.9 + random.random() * 0.2  # 随机波动
             
             demand = int(base_demand * trend * seasonal * noise)
