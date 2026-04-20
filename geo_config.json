@@ -64,7 +64,13 @@
     "chatgpt_api_key": "TODO: 配置 OpenAI API Key",
     "claude_api_key": "TODO: 配置 Anthropic API Key",
     "perplexity_api_key": "TODO: 配置 Perplexity API Key",
-    "gemini_api_key": "TODO: 配置 Google API Key"
+    "gemini_api_key": "TODO: 配置 Google API Key",
+    "google_api_key": "TODO: 配置 Google Custom Search API (免费 100 次/天)",
+    "google_cse_id": "TODO: 配置 Google Custom Search Engine ID",
+    "ollama_url": "http://localhost:11434",
+    "ollama_model": "llama3.1:8b",
+    "use_open_source": true,
+    "open_source_note": "✅ 已启用免费开源方案，无需付费 API"
   },
   "created_at": "2026-04-20T21:16:18+08:00",
   "updated_at": "2026-04-20T21:16:18+08:00"
