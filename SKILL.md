@@ -1,18 +1,20 @@
 ---
 name: cross-border-trade-agent
-version: 6.0.0
-description: Cross-Border Trade Agent - 全域自进化跨境贸易智能体
+version: 8.2.0
+description: Cross-Border Trade Agent - 全域自进化跨境贸易智能体 (GEO 增强版)
 category: trading
-tags: ['trading', 'cross-border', 'e-commerce', 'auto-evolution', 'internet-learning', 'pain-point-analysis']
+tags: ['trading', 'cross-border', 'e-commerce', 'auto-evolution', 'internet-learning', 'pain-point-analysis', 'GEO', 'AI-visibility']
 author: 太一 AGI
 created: 2026-04-11
-updated: 2026-04-15 00:51
+updated: 2026-04-20 21:10
 status: active
 ---
 
-# 太一跨境贸易 Agent 全域自进化智能体 (v6.0)
+# 太一跨境贸易 Agent 全域自进化智能体 (v8.2)
 
-> 全网穿透学习 · 痛点分析 · 解决方案 · 递归进化 · 全域自进化
+> 全网穿透学习 · 痛点分析 · 解决方案 · 递归进化 · 全域自进化 · **GEO 优化**
+
+🆕 **v8.2 新增**: 融合全球顶级 GEO 专家框架（Evan Bailyn/Aleyda Solís/Lily Ray 等），新增 AI 可见度审计 + Earned Media 管道能力。
 
 ---
 
@@ -42,6 +44,13 @@ status: active
 - ✅ 方案进化：+7%/代
 - ✅ 策略进化：+5%/代
 - ✅ 递归优化：≥80%
+
+**GEO 优化能力** (v8.2 🆕):
+- ✅ AI 可见度审计（4 大引擎：ChatGPT/Claude/Perplexity/Gemini）
+- ✅ Earned Media 管道管理
+- ✅ 实体优化/知识图谱
+- ✅ 多语言本地化权威构建
+- ✅ GEO KPI 追踪（Answer Share/提及率）
 
 ---
 
@@ -137,6 +146,16 @@ python3 core.py --pain-point-analysis
 
 # 生成解决方案
 python3 core.py --generate-solution --pain-points pain_points.json
+
+# 🆕 v8.2 GEO 功能
+# GEO 可见度审计
+python3 geo_auditor.py
+
+# Earned Media 管道管理
+python3 earned_media_tracker.py
+
+# 生成 GEO 报告
+python3 geo_auditor.py --report
 ```
 
 ---

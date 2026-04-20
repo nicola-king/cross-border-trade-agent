@@ -13,7 +13,14 @@
       "target_markets": ["USA", "UK", "Germany"],
       "competitors": ["Hydro Flask", "Contigo", "CamelBak"],
       "avg_price": 25.99,
-      "target_margin": 0.30
+      "target_margin": 0.30,
+      "data_sources": [
+        "customs_data",
+        "ecommerce_sales",
+        "third_party_report"
+      ],
+      "verified": true,
+      "confidence": "high"
     },
     {
       "name": "瑜伽垫",

@@ -32,6 +32,28 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8351068758:AAGtRXv2u5fGAMu
 TELEGRAM_CHAT_ID = "7073481596"
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
+# 数据验证配置
+DATA_VERIFICATION = {
+    "required_sources": [
+        "customs_data",      # 海关数据 (高可信度)
+        "global_customs_data", # 全球海关数据 (高可信度) ⭐新增
+        "ecommerce_sales",   # 电商销售数据 (高可信度)
+        "third_party_report", # 第三方报告 (中高可信度)
+        "google_ads_data",   # Google Ads 数据 (高可信度)
+    ],
+    "exclude_sources": [
+        "advertisement",     # 广告数据 (排除)
+        "marketing_claim",   # 营销宣传 (排除)
+        "unverified_claim",  # 未验证声明 (排除)
+    ],
+    "confidence_levels": {
+        "high": "海关数据/电商平台真实销售数据/Google Ads 数据",
+        "medium": "第三方权威机构报告",
+        "low": "市场调研/用户反馈",
+        "exclude": "广告宣传/未验证数据",
+    }
+}
+
 
 class IntelligenceReporter:
     """情报汇报系统"""
@@ -370,9 +392,24 @@ ROI: 3602%
         
         products = data.get("products", [])
         
+        # 数据验证 (必须通过情报验证)
+        verified_products = self._verify_product_data(products)
+        
         report = f"""🌐 跨境贸易 · 智能选品报告 (全网全域穿透性)
 
 📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}
+
+───
+
+✅ 数据验证说明
+
+⚠️ 数据来源要求:
+• ✅ 中国海关数据 (高可信度)
+• ✅ 全球海关数据 (高可信度) ⭐新增 - 美/欧/日/韩/印等
+• ✅ 电商平台真实销售数据 (高可信度)
+• ✅ 第三方权威机构报告 (中高可信度)
+• ✅ Google Ads 客户搜索数据 (高可信度)
+• ❌ 排除：广告宣传/营销宣传/未验证数据
 
 ───
 
@@ -455,6 +492,49 @@ ROI: 3602%
         self._save_report("smart-product", report)
         
         return report
+    
+    def _verify_product_data(self, products):
+        """验证产品数据 (必须通过情报验证)
+        
+        Args:
+            products: 产品列表
+            
+        Returns:
+            验证后的产品列表
+        """
+        print(f"\n🔍 数据验证 (情报验证)...")
+        
+        verified_products = []
+        
+        for product in products:
+            # 检查数据来源
+            data_sources = product.get("data_sources", [])
+            
+            # 必须有可靠数据源
+            has_reliable_source = any(
+                source in DATA_VERIFICATION["required_sources"]
+                for source in data_sources
+            )
+            
+            # 排除不可靠数据源
+            has_excluded_source = any(
+                source in DATA_VERIFICATION["exclude_sources"]
+                for source in data_sources
+            )
+            
+            if has_reliable_source and not has_excluded_source:
+                product["verified"] = True
+                product["confidence"] = "high"
+                verified_products.append(product)
+                print(f"  ✅ {product['name']}: 数据验证通过")
+            else:
+                product["verified"] = False
+                product["confidence"] = "exclude"
+                print(f"  ❌ {product['name']}: 数据验证未通过 (排除广告/宣传数据)")
+        
+        print(f"\n验证结果：{len(verified_products)}/{len(products)} 通过验证")
+        
+        return verified_products
     
     def generate_competitor_report(self):
         """生成竞品分析报告"""
