@@ -64,6 +64,12 @@
       "path": "modules/real-data-verifier",
       "dependencies": ["cross-border-core", "data-integrator"],
       "description": "真实数据验证：公司验证/电话验证/邮箱验证/官网验证"
+    },
+    "task-scheduler": {
+      "version": "9.0.0",
+      "path": "modules/task-scheduler",
+      "dependencies": ["cross-border-core", "report-engine", "intelligence-hub", "self-evolution"],
+      "description": "任务调度中心：情报推送/竞品监控/任务自检/月度战略/清关自动化"
     }
   },
   "shared": {

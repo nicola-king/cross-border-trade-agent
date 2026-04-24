@@ -50,6 +50,7 @@
 | **self-evolution** | v9.0 | 6KB | 自我进化 | cross-border-core |
 | **report-engine** | v9.0 | 5KB | 报告系统 | cross-border-core |
 | **real-data-verifier** | v9.0 | 4KB | 真实数据验证 | data-integrator |
+| **task-scheduler** | v9.0 | 18KB | 任务调度中心 | report-engine, intelligence-hub, self-evolution |
 
 ---
 
@@ -179,6 +180,21 @@ cross-border-trade-agent/
 │       ├── tests/
 │       └── docs/
 │
+│   └── task-scheduler/                # 任务调度中心
+│       ├── SKILL.md
+│       ├── core.py
+│       ├── jobs/
+│       │   ├── daily_intelligence.py
+│       │   ├── weekly_intelligence.py
+│       │   ├── monthly_strategy.py
+│       │   ├── competitor_monitor.py
+│       │   ├── clearance_check.py
+│       │   └── system_health.py
+│       ├── config.json
+│       ├── data/
+│       ├── tests/
+│       └── docs/
+│
 ├── shared/                            # 共享资源
 │   ├── api/                           # 标准 API 定义
 │   │   ├── base.py
@@ -283,7 +299,8 @@ cross-border-core (无依赖)
     ├── transaction-support
     ├── self-evolution
     ├── report-engine
-    └── real-data-verifier → data-integrator
+    ├── real-data-verifier → data-integrator
+    └── task-scheduler → report-engine, intelligence-hub, self-evolution
 ```
 
 ---
