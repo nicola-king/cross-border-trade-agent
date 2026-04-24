@@ -11,11 +11,11 @@
       "dependencies": [],
       "description": "Agent 核心框架/路由/调度"
     },
-    "guike-wang": {
+    "guike-zhilu": {
       "version": "9.0.0",
-      "path": "modules/guike-wang",
+      "path": "modules/guike-zhilu",
       "dependencies": ["cross-border-core"],
-      "description": "贵客之王闭环：搜寻→清洗→触达→培育"
+      "description": "贵客之路闭环：搜寻→清洗→触达→培育"
     },
     "geo-outbound": {
       "version": "9.0.0",

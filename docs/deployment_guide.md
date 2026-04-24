@@ -84,7 +84,7 @@ openclaw gateway status
 ```
 /home/nicola/.openclaw/workspace/
 ├── skills/01-trading/cross-border-trade-agent/
-│   ├── 贵客之王模块 (6 个)
+│   ├── 贵客之路模块 (6 个)
 │   ├── GEO 外贸模块 (7 个)
 │   ├── 智能决策模块 (4 个)
 │   ├── 交易支持模块 (4 个)

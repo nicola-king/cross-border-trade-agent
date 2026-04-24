@@ -15,7 +15,7 @@
 | 模块 | 版本 | 描述 |
 |------|------|------|
 | **cross-border-core** | v9.0.0 | 核心框架/路由/调度 |
-| **guike-wang** | v9.0.0 | 贵客之王闭环 |
+| **guike-wang** | v9.0.0 | 贵客之路闭环 |
 | **geo-outbound** | v9.0.0 | GEO 外贸开发 |
 | **data-integrator** | v9.0.0 | 7 大数据源整合 |
 | **intelligence-hub** | v9.0.0 | 智能分析中心 |

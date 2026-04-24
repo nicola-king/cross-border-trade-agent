@@ -81,9 +81,9 @@ class CrossBorderAgent:
             模块名
         """
         routing = {
-            "search": "guike-wang",
-            "verification": "guike-wang",
-            "outreach": "guike-wang",
+            "search": "guike-zhilu",
+            "verification": "guike-zhilu",
+            "outreach": "guike-zhilu",
             "geo_analysis": "geo-outbound",
             "data_fetch": "data-integrator",
             "competitor": "intelligence-hub",

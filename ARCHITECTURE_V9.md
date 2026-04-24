@@ -41,7 +41,7 @@
 | 模块名 | 版本 | 大小 | 独立价值 | 依赖 |
 |--------|------|------|---------|------|
 | **cross-border-core** | v9.0 | 5KB | Agent 框架/路由/调度 | 无 |
-| **guike-wang** | v9.0 | 15KB | 贵客之王闭环 | cross-border-core |
+| **guike-zhilu** | v9.0 | 15KB | 贵客之路闭环 | cross-border-core |
 | **geo-outbound** | v9.0 | 12KB | GEO 外贸开发 | cross-border-core |
 | **data-integrator** | v9.0 | 20KB | 7 大数据源整合 | cross-border-core |
 | **intelligence-hub** | v9.0 | 10KB | 智能分析中心 | data-integrator |
@@ -71,7 +71,7 @@ cross-border-trade-agent/
 │   │   ├── tests/
 │   │   └── docs/
 │   │
-│   ├── guike-wang/                    # 贵客之王
+│   ├── guike-zhilu/                    # 贵客之路
 │   │   ├── SKILL.md
 │   │   ├── core.py
 │   │   ├── search.py
@@ -275,7 +275,7 @@ class EventBus:
 
 ```
 cross-border-core (无依赖)
-    ├── guike-wang
+    ├── guike-zhilu
     ├── geo-outbound
     ├── data-integrator
     ├── intelligence-hub → data-integrator
@@ -290,17 +290,17 @@ cross-border-core (无依赖)
 
 ## 🚀 独立发布示例
 
-### 发布 guike-wang 模块
+### 发布 guike-zhilu 模块
 
 ```bash
 # 安装
-clawhub install guike-wang@9.0.0
+clawhub install guike-zhilu@9.0.0
 
 # 使用
 python -m guike_wang --task "search" --product "折叠房屋"
 
 # 独立运行
-cd modules/guike-wang
+cd modules/guike-zhilu
 python core.py
 ```
 
@@ -350,7 +350,7 @@ python core.py
 
 每个模块独立维护版本号：
 - `cross-border-core`: v9.0.0
-- `guike-wang`: v9.0.0
+- `guike-zhilu`: v9.0.0
 - `geo-outbound`: v9.0.0
 - ...
 
@@ -365,7 +365,7 @@ python core.py
 - [ ] 编写 manifest.json
 
 ### Phase 2: 模块迁移 (3 天)
-- [ ] 迁移 guike-wang
+- [ ] 迁移 guike-zhilu
 - [ ] 迁移 geo-outbound
 - [ ] 迁移 data-integrator
 - [ ] 迁移 intelligence-hub
