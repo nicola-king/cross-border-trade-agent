@@ -62,9 +62,9 @@
     },
     "system_health": {
       "enabled": true,
-      "schedule": "0 * * * *",
+      "schedule": "0 23 * * *",
       "task": "self_check",
-      "description": "系统自检 (每小时)",
+      "description": "系统自检 (每日 23:00)",
       "params": {},
       "channels": ["telegram"]
     }
