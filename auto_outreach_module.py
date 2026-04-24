@@ -11,7 +11,7 @@
 - 回复追踪分析
 - HIR (High-Intent Review) 人工复核
 
-获客之王三步骤闭环:
+贵客之王三步骤闭环:
 1. 全网全域搜寻 → prospect_search.py (已有)
 2. 深度线索清洗 → data_verification (已有)
 3. 自动拟人触达 → 本模块 (新增)

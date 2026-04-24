@@ -70,29 +70,47 @@ class IntelligenceReporter:
         self.monitor_products_file = Path(__file__).parent / "monitor_products.json"
     
     def send_telegram_message(self, text, parse_mode="Markdown"):
-        """发送 Telegram 消息"""
+        """发送 Telegram 消息 (带代理检查和重试)"""
         print(f"📱 发送 Telegram 消息")
+        
+        # 代理配置
+        proxies = {
+            'http': 'http://127.0.0.1:7890',
+            'https': 'http://127.0.0.1:7890',
+        }
         
         url = f"{TELEGRAM_API_URL}/sendMessage"
         
-        try:
-            data = {
-                'chat_id': TELEGRAM_CHAT_ID,
-                'text': text[:4096],
-                'parse_mode': parse_mode,
-            }
-            
-            response = requests.post(url, data=data, timeout=30)
-            
-            if response.status_code == 200:
-                print(f"✅ 消息发送成功")
-                return True
-            else:
-                print(f"❌ 发送失败：{response.status_code}")
-                return False
-        except Exception as e:
-            print(f"❌ 错误：{e}")
-            return False
+        # 重试机制 (最多 3 次)
+        max_retries = 3
+        for attempt in range(1, max_retries + 1):
+            try:
+                print(f"🔄 尝试发送 (第{attempt}次)...")
+                
+                data = {
+                    'chat_id': TELEGRAM_CHAT_ID,
+                    'text': text[:4096],
+                    'parse_mode': parse_mode,
+                }
+                
+                # 使用代理发送
+                response = requests.post(url, data=data, timeout=30, proxies=proxies)
+                
+                if response.status_code == 200:
+                    print(f"✅ 消息发送成功")
+                    return True
+                else:
+                    print(f"❌ 发送失败：{response.status_code}")
+            except Exception as e:
+                print(f"❌ 第{attempt}次失败：{e}")
+                if attempt < max_retries:
+                    print(f"⏳ 10 秒后重试...")
+                    import time
+                    time.sleep(10)
+                else:
+                    print(f"❌ 达到最大重试次数，保存本地报告")
+        
+        return False
     
     def generate_daily_brief(self):
         """生成每日情报简报"""
