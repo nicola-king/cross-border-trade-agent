@@ -244,7 +244,7 @@ python3 skills/01-trading/cross-border-trade-agent/product_selector.py
 
 > **"体积小才能摊薄运费，利润足才能持续经营"**
 
-> **"复购强降低获客成本，零售后避免海外陷阱"**
+> **"复购强降低贵客成本，零售后避免海外陷阱"**
 
 ---
 

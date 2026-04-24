@@ -31,7 +31,7 @@ class DeletionExecutor:
     PENDING_DELETIONS = [
         {
             "id": "DEL_001",
-            "category": "获客流程",
+            "category": "贵客流程",
             "item": "潜客搜寻人工环节",
             "action": "自动化",
             "priority": "P0",
@@ -39,7 +39,7 @@ class DeletionExecutor:
         },
         {
             "id": "DEL_002",
-            "category": "获客流程",
+            "category": "贵客流程",
             "item": "数据验证重复步骤",
             "action": "删除或合并",
             "priority": "P1",
@@ -126,7 +126,7 @@ class DeletionExecutor:
         }
         
         # 根据类别执行不同操作
-        if deletion["category"] == "获客流程":
+        if deletion["category"] == "贵客流程":
             result["changes"] = ["优化潜客搜寻流程", "删除重复验证步骤"]
         elif deletion["category"] == "内容流程":
             result["changes"] = ["简化内容选题流程", "优化审核流程"]

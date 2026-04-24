@@ -33,7 +33,7 @@ class OptimizationDashboard:
         "efficiency": {
             "name": "效率提升",
             "metrics": [
-                {"name": "获客效率", "baseline": 10, "current": 500, "unit": "个/天"},
+                {"name": "贵客效率", "baseline": 10, "current": 500, "unit": "个/天"},
                 {"name": "验证准确率", "baseline": 75, "current": 95, "unit": "%"},
                 {"name": "触达响应率", "baseline": 15, "current": 35, "unit": "%"},
                 {"name": "转化率", "baseline": 8, "current": 20, "unit": "%"}
@@ -51,7 +51,7 @@ class OptimizationDashboard:
         "cost_reduction": {
             "name": "成本降低",
             "metrics": [
-                {"name": "获客成本", "baseline": 100, "current": 20, "unit": "美元/个"},
+                {"name": "贵客成本", "baseline": 100, "current": 20, "unit": "美元/个"},
                 {"name": "成交周期", "baseline": 45, "current": 20, "unit": "天"}
             ]
         },
@@ -135,7 +135,7 @@ class OptimizationDashboard:
             return 100.0 if current > 0 else 0.0
         
         # 对于越低越好的指标 (时间/成本)
-        if metric["name"] in ["获客成本", "成交周期", "潜客搜寻", "数据验证", "内容生产", "报告生成"]:
+        if metric["name"] in ["贵客成本", "成交周期", "潜客搜寻", "数据验证", "内容生产", "报告生成"]:
             return round(((baseline - current) / baseline) * 100, 2)
         
         # 对于越高越好的指标
@@ -165,7 +165,7 @@ class OptimizationDashboard:
                 improvement = self._calculate_improvement(metric)
                 
                 # 检查是否触发告警
-                if metric["name"] in ["获客成本", "成交周期", "潜客搜寻", "数据验证", "内容生产", "报告生成"]:
+                if metric["name"] in ["贵客成本", "成交周期", "潜客搜寻", "数据验证", "内容生产", "报告生成"]:
                     # 越低越好的指标，如果改进为负则告警
                     if improvement < self.ALERT_THRESHOLDS["time_increase"]:
                         alerts.append({

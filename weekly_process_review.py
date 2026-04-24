@@ -31,7 +31,7 @@ class WeeklyProcessReview:
     # 审查清单
     REVIEW_CHECKLIST = [
         {
-            "category": "获客流程",
+            "category": "贵客流程",
             "items": [
                 "潜客搜寻是否还有人工环节？",
                 "数据验证是否有重复步骤？",

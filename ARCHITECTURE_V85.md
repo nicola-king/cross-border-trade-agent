@@ -210,7 +210,7 @@
 
 ## 🔄 完整工作流程
 
-### 获客工作流程
+### 贵客工作流程
 
 ```
 用户请求
@@ -273,7 +273,7 @@
 | `schema_annotation_module.py` | 6.8KB | Schema 标注 |
 | `ai_citation_monitor.py` | 5.2KB | AI 引用监测 |
 | `content_marketing_module.py` | 7.5KB | 内容营销 |
-| `geo_acquisition_fusion.md` | 6.2KB | GEO+ 获客融合 |
+| `geo_acquisition_fusion.md` | 6.2KB | GEO+ 贵客融合 |
 | `geo_testing_report.md` | 4.5KB | GEO 测试报告 |
 | `geo_user_guide.md` | 5.8KB | 用户指南 |
 
@@ -322,7 +322,7 @@
 
 | 能力 | v8.0 | v8.5 | 提升 |
 |------|------|------|------|
-| **获客闭环** | ✅ | ✅ + GEO 增强 | + 新概念 |
+| **贵客闭环** | ✅ | ✅ + GEO 增强 | + 新概念 |
 | **数据源** | 7 大 | 7 大+HS 编码 | +HS 编码分析 |
 | **AI 识别** | 基础搜索 | Schema 标注 | +80% |
 | **内容营销** | 单一渠道 | LinkedIn/Quora | +300% |

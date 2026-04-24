@@ -2,7 +2,7 @@
 
 > **版本**: v8.0 (贵客之路融合版)  
 > **创建**: 2026-04-18  
-> **定位**: 跨境贸易全流程自动化 + 智能获客  
+> **定位**: 跨境贸易全流程自动化 + 智能贵客  
 > **状态**: ✅ 生产就绪
 
 ---
@@ -11,7 +11,7 @@
 
 ### 贵客之路精华融合
 
-| 获客功能 | 融合模块 | 提升 |
+| 贵客功能 | 融合模块 | 提升 |
 |---------|---------|------|
 | **全网全域搜寻** | `prospect_search.py` | +500% |
 | **深度线索清洗** | `lead_scoring.py` | +300% |
@@ -192,7 +192,7 @@ message = outreach.generate_message("initial_contact", lead)
 
 | 功能 | v7.0 | v8.0 | 提升 |
 |------|------|------|------|
-| **营销获客** | 基础渠道 | 全网搜寻 | +500% |
+| **营销贵客** | 基础渠道 | 全网搜寻 | +500% |
 | **线索管理** | ❌ | 评分分级 | 新增 |
 | **触达渠道** | 邮件为主 | 全渠道 | +400% |
 | **跟进序列** | 简单 | 自动化 | +300% |
@@ -203,7 +203,7 @@ message = outreach.generate_message("initial_contact", lead)
 
 ## 🎯 完整工作流程
 
-### 从获客到转化
+### 从贵客到转化
 
 ```
 1. 全网搜寻
@@ -236,7 +236,7 @@ message = outreach.generate_message("initial_contact", lead)
 
 | 指标 | v7.0 | v8.0 | 提升 |
 |------|------|------|------|
-| **获客效率** | 人工 | 自动化 | +500% |
+| **贵客效率** | 人工 | 自动化 | +500% |
 | **线索质量** | 随机 | 评分分级 | +200% |
 | **转化率** | ~5% | ~15% | +200% |
 | **跟进覆盖** | 有限 | 全渠道 | +300% |
@@ -258,7 +258,7 @@ git pull
 python3 lead_generation.py
 
 # 3. 查看输出
-🚀 跨境贸易获客模块 v8.0 - 演示
+🚀 跨境贸易贵客模块 v8.0 - 演示
 ============================================================
 🎯 开始生成销售线索...
 🔍 开始搜寻客户：['smart water bottle', 'yoga mat', 'LED desk lamp'] → ['USA', 'UK', 'Germany', 'France', 'Australia']
@@ -291,11 +291,11 @@ from lead_generation import LeadGenerationModule
 
 class CrossBorderAgent:
     def __init__(self):
-        # 新增：获客模块
+        # 新增：贵客模块
         self.lead_gen = LeadGenerationModule()
         
     async def marketing_loop(self):
-        """营销获客循环"""
+        """营销贵客循环"""
         while True:
             # 搜寻客户
             leads = self.lead_gen.generate_leads(
@@ -318,7 +318,7 @@ class CrossBorderAgent:
 
 ## 📈 关键指标监控
 
-### 获客漏斗
+### 贵客漏斗
 
 ```
 全网搜寻 → 1000 个线索
@@ -370,7 +370,7 @@ class CrossBorderAgent:
 ### v8.0 完成度
 
 ```
-✅ 获客模块 - 100%
+✅ 贵客模块 - 100%
 ✅ 线索评分 - 100%
 ✅ 自动触达 - 100%
 ✅ 跟进序列 - 100%
@@ -388,7 +388,7 @@ class CrossBorderAgent:
 ✅ 全渠道触达 - 邮件/微信/WhatsApp/LinkedIn
 ✅ 自动化跟进 - 个性化序列
 ✅ 人工复核 - 关键节点把关
-✅ 增长闭环 - 持续获客转化
+✅ 增长闭环 - 持续贵客转化
 ```
 
 ---
@@ -405,6 +405,6 @@ class CrossBorderAgent:
 
 ---
 
-**🚢 跨境贸易 Agent v8.0 - 让获客更智能，让转化更高效！**
+**🚢 跨境贸易 Agent v8.0 - 让贵客更智能，让转化更高效！**
 
 **太一 AGI · 2026-04-18**
