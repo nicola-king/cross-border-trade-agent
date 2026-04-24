@@ -1,0 +1,78 @@
+{
+  "name": "cross-border-trade-agent",
+  "version": "9.0.0",
+  "description": "跨境贸易全流程自动化 Agent 集群",
+  "author": "太一 AGI",
+  "license": "MIT",
+  "modules": {
+    "cross-border-core": {
+      "version": "9.0.0",
+      "path": "modules/cross-border-core",
+      "dependencies": [],
+      "description": "Agent 核心框架/路由/调度"
+    },
+    "guike-wang": {
+      "version": "9.0.0",
+      "path": "modules/guike-wang",
+      "dependencies": ["cross-border-core"],
+      "description": "贵客之王闭环：搜寻→清洗→触达→培育"
+    },
+    "geo-outbound": {
+      "version": "9.0.0",
+      "path": "modules/geo-outbound",
+      "dependencies": ["cross-border-core"],
+      "description": "GEO 外贸开发：市场分析→潜客名单→内容营销→监测优化"
+    },
+    "data-integrator": {
+      "version": "9.0.0",
+      "path": "modules/data-integrator",
+      "dependencies": ["cross-border-core"],
+      "description": "7 大数据源整合：海关/电商/互联网/搜索/报告/物流/广告"
+    },
+    "intelligence-hub": {
+      "version": "9.0.0",
+      "path": "modules/intelligence-hub",
+      "dependencies": ["cross-border-core", "data-integrator"],
+      "description": "智能分析中心：竞品分析/选品评分/厂家推荐/趋势预测"
+    },
+    "conversion-optimizer": {
+      "version": "9.0.0",
+      "path": "modules/conversion-optimizer",
+      "dependencies": ["cross-border-core"],
+      "description": "转化优化中心：漏斗分析/ROI 追踪/渠道对比/A/B 测试"
+    },
+    "transaction-support": {
+      "version": "9.0.0",
+      "path": "modules/transaction-support",
+      "dependencies": ["cross-border-core"],
+      "description": "交易支持中心：物流优化/价格对比/销售预测/多语言客服"
+    },
+    "self-evolution": {
+      "version": "9.0.0",
+      "path": "modules/self-evolution",
+      "dependencies": ["cross-border-core"],
+      "description": "自我进化系统：自愈/技能结晶/Token 监控"
+    },
+    "report-engine": {
+      "version": "9.0.0",
+      "path": "modules/report-engine",
+      "dependencies": ["cross-border-core"],
+      "description": "报告系统：智能报告/推送/ES 引擎/Markdown 生成"
+    },
+    "real-data-verifier": {
+      "version": "9.0.0",
+      "path": "modules/real-data-verifier",
+      "dependencies": ["cross-border-core", "data-integrator"],
+      "description": "真实数据验证：公司验证/电话验证/邮箱验证/官网验证"
+    }
+  },
+  "shared": {
+    "api": "shared/api",
+    "utils": "shared/utils"
+  },
+  "install": {
+    "script": "deploy/install.sh",
+    "uninstall": "deploy/uninstall.sh",
+    "update": "deploy/update.sh"
+  }
+}
